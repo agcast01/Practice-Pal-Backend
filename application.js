@@ -1,6 +1,7 @@
 const express = require('express');
 const { Sequelize } = require("sequelize");
 
+const users = require('./routes/userRoutes')
 const { User, db } = require('./db/models')
 
 const app = express();
@@ -23,6 +24,8 @@ async function testConnection() {
 }
 
 app.get('/', (req, res) => {
-  const users = testConnection().then(user => {res.send(user)});
+  res.send('Hello World');
 });
+
+app.use('/users', users)
 app.listen(3000);
