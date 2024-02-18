@@ -6,7 +6,8 @@
     "sqlite3": "^5.1.7"
   },
   "scripts": {
-    "start": "node application.js"
+    "start": "node application.js",
+    "begin": "nodemon ./application.js localhost 8080"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.9",
