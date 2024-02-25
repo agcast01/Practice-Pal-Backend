@@ -15,8 +15,14 @@ router.post('/signup', async (req, res) => {
   newUser.createdAt = new Date();
   newUser.updatedAt = new Date();
   newUser.password = await bcrypt.hash(newUser.password, 10);
-  await User.create(newUser);
-  res.status(201).send('Success');
+  try {
+    await User.create(newUser);
+    res.status(201).send('Success');
+  } catch (e) {
+    res.status(400).send("Email must be unique.")
+  }
+  
+  
 })
 
 router.post('/login', async (req, res) => {
