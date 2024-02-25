@@ -10,6 +10,8 @@ const sequelize = new Sequelize({
   storage: './db/database.sqlite'
 })
 
+app.use(express.json())
+
 
 async function testConnection() {
   try {
