@@ -2,6 +2,7 @@ const express = require('express');
 const { Sequelize } = require("sequelize");
 
 const users = require('./routes/userRoutes')
+const sessions = require('./routes/sessionRoutes')
 const { User, db } = require('./db/models')
 
 const app = express();
@@ -30,4 +31,5 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', users)
+app.use('/sessions', sessions)
 app.listen(3000);

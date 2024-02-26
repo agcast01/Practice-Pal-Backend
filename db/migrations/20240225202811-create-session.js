@@ -9,9 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
-        type: Sequelize.INTEGER,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -19,10 +16,37 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+    }).then(() => {
+      queryInterface.addColumn(
+        'Sessions',
+        'userId',
+        {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'Users',
+            key: 'id'
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
+      )
     });
+
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Sessions');
+    
+    await queryInterface.removeColumn(
+      'Sessions',
+      'userId'
+    ).then( () => {
+      return queryInterface.removeColumn(
+        'Users',
+        'sessionId'
+      )
+    }  
+    ).then(
+      () => queryInterface.dropTable('Sessions')
+    );
   }
 };

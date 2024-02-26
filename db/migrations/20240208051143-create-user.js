@@ -25,8 +25,26 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+    await queryInterface.addColumn(
+      'Users',
+      'sessionId',
+      {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Sessions',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      }
+    );
   },
   async down(queryInterface, Sequelize) {
+    await queryInterface.removeColumn(
+      'Users',
+      'sessionId'
+    )
     await queryInterface.dropTable('Users');
+
   }
 };
