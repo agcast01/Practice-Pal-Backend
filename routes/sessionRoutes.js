@@ -10,10 +10,10 @@ router.get('/', async (req, res) => {
 
 router.post('/newSession', async (req, res) => {
   const {userId} = req.body;
-  const data = await Session.create({userId});
-  const user = await User.findByPk(userId)
-  user.sessionIds.append(data)
-  res.status(201).send(JSON.stringify(data.dataValues));
+  const session = await Session.create({userId});
+  const user = await session.getUser()
+  console.log("Associated User: ", user.dataValues)
+  res.status(201).send(JSON.stringify(session.dataValues));
 })
 
 module.exports = router

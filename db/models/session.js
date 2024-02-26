@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.User)
+      Session.belongsTo(models.User, {'foreignKey': 'userId'})
     }
   }
   Session.init({
-    
+    userID: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Session',
