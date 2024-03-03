@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Session.init({
     userID: DataTypes.INTEGER,
+    title: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Session',
