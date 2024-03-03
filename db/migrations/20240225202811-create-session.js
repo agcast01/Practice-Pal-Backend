@@ -18,7 +18,7 @@ const getCurrentDate = () => {
   ]
   const currentTime = new Date()
   const month = months[currentTime.getMonth()]
-  return `${month + currentTime.getDate()}`
+  return `${month + ' ' + currentTime.getDate()}, ${currentTime.getFullYear()}`
 }
 module.exports = {
   async up(queryInterface, Sequelize) {
