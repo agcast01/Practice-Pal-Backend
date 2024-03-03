@@ -25,4 +25,11 @@ router.put('/:sessionId/edit', async (req, res) => {
   res.send(session.dataValues);
 })
 
+router.delete('/:sessionId/delete', async (req, res) => {
+  const {sessionId} = req.params;
+  const session = await Session.findByPk(Number(sessionId));
+  session.destroy();
+  res.send("Successfully deleted session")
+})
+
 module.exports = router
