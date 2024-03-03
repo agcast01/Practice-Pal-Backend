@@ -16,4 +16,13 @@ router.post('/newSession', async (req, res) => {
   res.status(201).send(JSON.stringify(session.dataValues));
 })
 
+router.put('/:sessionId/edit', async (req, res) => {
+  const {sessionId} = req.params;
+  const {title} = req.body;
+  const session = await Session.findByPk(Number(sessionId));
+  session.title = title;
+  await session.save()
+  res.send(session.dataValues);
+})
+
 module.exports = router
